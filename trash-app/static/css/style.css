@@ -1,0 +1,452 @@
+:root {
+    --primary-color: #2ecc71;
+    --background-color: #f8fefb;
+    --text-color: #f0f0f0; /* Changed to a light grey/white */
+    --heading-color: #ffffff; /* Changed to white */
+    --border-color: #e0e0e0;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --secondary-text-color: #cccccc; /* Changed to a lighter grey */
+    --text-shadow-light: 0px 0px 6px rgba(0,0,0,0.7); /* New: light text shadow for readability */
+    --text-shadow-strong: 0px 0px 8px rgba(0,0,0,0.9); /* New: stronger text shadow */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    color: var(--text-color);
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    /* --- New Background Image Rules --- */
+    background-image: url('../assets/background.jpg'); /* Make sure to use your image's file name */
+    background-size: cover; /* Stretches the image to cover the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Makes the background stay in place when scrolling */
+}
+
+header {
+    padding: 2rem 1rem;
+    background-color: transparent; /* Ensure no solid background obscures the image */
+}
+
+footer {
+    padding: 2rem 1rem;
+    background-color: transparent; /* Ensure no solid background obscures the image */
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--heading-color); /* Now white */
+    margin: 0;
+    text-shadow: var(--text-shadow-strong); /* Apply stronger shadow */
+}
+
+header p {
+    margin: 0.5rem 0;
+    color: var(--text-color); /* Ensure it uses the light text color */
+    text-shadow: var(--text-shadow-light); /* Apply lighter shadow */
+}
+main {
+    flex-grow: 1; /* Makes main content take available space */
+    padding: 2rem 1rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.upload-section, .prediction-section {
+    flex: 1;
+    min-width: 300px;
+    padding: 1.5rem; /* Reduced padding slightly */
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color); /* Added border */
+    display: flex; /* Flex container for internal elements */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* For the remove button */
+}
+
+/* --- Upload Section Styles --- */
+.upload-area {
+    width: 100%;
+    border: 2px dashed var(--primary-color);
+    border-radius: 8px;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-area:hover {
+    background-color: #f0fff6;
+}
+
+.upload-area i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.upload-area p {
+    font-weight: 600;
+    color: var(--heading-color);
+    margin: 0;
+}
+
+#choose-file-btn, #classify-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background-color 0.3s ease;
+    width: fit-content; /* Adjust button width */
+}
+
+#choose-file-btn:hover, #classify-btn:hover {
+    background-color: #27ae60;
+}
+
+.upload-area span {
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+    margin-top: 1rem;
+}
+
+/* --- Uploaded Image Display --- */
+#uploaded-image-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#uploaded-preview-img {
+    max-width: 90%;
+    max-height: 200px; /* Limit height */
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    object-fit: contain; /* Ensure image fits without cropping */
+}
+
+#uploaded-file-name {
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+    word-break: break-all; /* Break long file names */
+    max-width: 90%;
+    text-align: center;
+}
+
+#uploaded-file-size {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 1rem;
+}
+
+.remove-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.remove-image:hover {
+    background-color: #c0392b;
+}
+
+/* --- Prediction Section Styles --- */
+#prediction-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure it fills the height of its parent */
+    min-height: 250px; /* Give it a minimum height if no content */
+}
+
+#prediction-placeholder i {
+    font-size: 3rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+#prediction-placeholder p {
+    font-weight: 600;
+    margin: 0;
+}
+
+#prediction-placeholder span {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+    margin-top: 0.5rem;
+}
+
+#prediction-result {
+    width: 100%;
+    text-align: left;
+}
+
+.prediction-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.prediction-header i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+}
+
+.classification-title {
+    font-size: 1.6rem;
+    color: var(--heading-color);
+    margin: 0;
+    flex-grow: 1; /* Allow it to take available space */
+}
+
+.confidence-badge {
+    background-color: #e0f2f1; /* Light teal background */
+    color: #00796b; /* Darker teal text */
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.confidence-level {
+    margin-bottom: 2rem;
+}
+
+.confidence-level p {
+    font-size: 1rem;
+    color: var(--heading-color);
+    margin-bottom: 0.8rem;
+    text-align: left;
+}
+
+.progress-bar-container {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    background-color: var(--primary-color);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+.confidence-value {
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: right;
+    display: block; /* Ensure it's on its own line */
+    font-size: 1.1rem;
+}
+
+.dispose-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dispose-button i {
+    margin-right: 0.8rem;
+    font-size: 1.3rem;
+}
+
+.dispose-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+footer {
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upload-section, .prediction-section {
+        width: 100%;
+        max-width: 400px; /* Limit width on smaller screens */
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* --- Fix for Text Color on White Panels --- */
+
+/* Define a dark text color in your root variables for consistency */
+:root {
+    --dark-text-color: #333; /* Adding a variable for dark text */
+}
+
+/* All text inside the white panels should be dark */
+.upload-section, .prediction-section {
+    color: var(--dark-text-color);
+}
+
+/* Specifically target headings and paragraphs inside the panels */
+.upload-area p,
+#uploaded-file-name,
+#prediction-placeholder p,
+.classification-title,
+.confidence-level p {
+    color: var(--dark-text-color);
+}
+
+/* Target smaller, secondary text */
+.upload-area span,
+#uploaded-file-size,
+#prediction-placeholder span {
+    color: #777; /* A slightly lighter grey for secondary text */
+}
+/* Add this to style.css */
+#suggestion-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    text-align: left;
+    white-space: pre-wrap; /* This preserves formatting like newlines from Gemini */
+}
+/* Add to style.css */
+
+#suggestion-container {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem; /* Increased padding for better readability */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: #f8f9fa; /* A very light grey background */
+    text-align: left;
+    color: var(--dark-text-color); /* Ensure text is dark inside the light box */
+    font-size: 0.95rem; /* Slightly adjust font size */
+    line-height: 1.6; /* Improve line spacing */
+}
+
+/* Style headings within the suggestion container */
+#suggestion-container h2 {
+    font-size: 1.3rem;
+    color: var(--primary-color); /* Use your primary color for headings */
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid #eee; /* Subtle separator */
+    padding-bottom: 0.5rem;
+}
+
+#suggestion-container h3 {
+    font-size: 1.15rem;
+    color: #444; /* Slightly darker than body text */
+    margin-top: 1.2rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Style paragraphs */
+#suggestion-container p {
+    margin-bottom: 0.8rem;
+    color: var(--dark-text-color);
+}
+
+/* Style strong/bold text */
+#suggestion-container strong {
+    font-weight: 700;
+    color: #333;
+}
+
+/* Style lists (if Gemini returns them) */
+#suggestion-container ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 1rem;
+}
+
+#suggestion-container ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+    margin-bottom: 1rem;
+}
+
+#suggestion-container li {
+    margin-bottom: 0.5rem;
+}
+
+/* Style for the loading message */
+.loading-message {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+}
