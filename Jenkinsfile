@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 echo 'Code fetched successfully'
@@ -14,9 +15,13 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Deploy on Localhost') {
             steps {
-                bat 'python --version'
+                echo 'Starting Flask app on localhost'
+
+                bat '''
+                start cmd /k "cd trash-app && python app.py"
+                '''
             }
         }
     }
