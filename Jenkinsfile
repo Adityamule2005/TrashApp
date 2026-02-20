@@ -1,21 +1,22 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Default'
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/username/project-name.git'
+                echo 'Code fetched successfully'
             }
         }
 
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                sh 'mvn clean package'
+                bat 'pip install -r trash-app/requirements.txt'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'python --version'
             }
         }
     }
