@@ -1,8 +1,7 @@
 pipeline {
-    agent any
+    agent { label 'agent1' }
 
     stages {
-
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t trashapp .'
@@ -11,9 +10,8 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                bat 'docker run -d -p 8081:80 trashapp'
+                bat 'docker run -d -p 8081:5000 trashapp'
             }
         }
-
     }
 }
