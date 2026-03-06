@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'agent any' }
+    agent { label 'agent1' }
 
     stages {
         stage('Build Docker Image') {
@@ -10,7 +10,7 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                bat 'docker run -d -p 8081:5000 trashapp'
+                bat 'docker run -d -p 5000:5000 trashapp'
             }
         }
     }
