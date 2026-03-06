@@ -3,26 +3,17 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Code fetched successfully'
+                bat 'docker build -t trashapp .'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Run Container') {
             steps {
-                bat 'pip install -r trash-app/requirements.txt'
+                bat 'docker run -d -p 8081:80 trashapp'
             }
         }
 
-        stage('Deploy on Localhost') {
-            steps {
-                echo 'Starting Flask app on localhost'
-
-                bat '''
-                start cmd /k "cd trash-app && python app.py"
-                '''
-            }
-        }
     }
 }
